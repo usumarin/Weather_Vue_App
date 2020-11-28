@@ -7,6 +7,7 @@ ENV TZ Asia/Tokyo
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    yarn global add @vue/cli@4.5.9
+    yarn global add @vue/cli@4.5.9 && \
+    yarn add axios@0.21.0
 
 ADD . /app
