@@ -43,7 +43,7 @@ export default {
           params: {
             id: "2172797",
             lang: "ja",
-            units: "%22metric%22 or %22imperial%22",
+            units: "metric",
             q: this.getWeatherQuery,
           },
         })
