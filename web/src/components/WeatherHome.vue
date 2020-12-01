@@ -1,10 +1,18 @@
 <template>
-  <section>
+  <section id="weatherHome">
     <input
       v-model="getWeatherQuery"
       placeholder="調べたい場所を入力してください"
     />
     <button @click="getWeather">天気を調べる</button>
+    <div v-if="hasGetWeatherData">
+      <p>地名:{{ getWeatherResult.name }}</p>
+      <li v-for="weather in getWeatherResult.weather" :key="weather.id">
+        天気: {{ weather.description }}
+        <img :src="getWeatherImageUrl" />
+      </li>
+      <p>気温: {{ getWeatherResult.main.temp }}</p>
+    </div>
   </section>
 </template>
 
@@ -15,6 +23,10 @@ export default {
   data() {
     return {
       getWeatherQuery: "",
+      getWeatherResult: {},
+      getWeatherInfo: {},
+      getWeatherImageUrl: "",
+      hasGetWeatherData: false,
     };
   },
   methods: {
@@ -36,6 +48,13 @@ export default {
           },
         })
         .then((response) => {
+          this.getWeatherResult = response.data;
+          this.getWeatherInfo = Object.assign(...this.getWeatherResult.weather);
+          this.getWeatherImageUrl =
+            "http://openweathermap.org/img/wn/" +
+            this.getWeatherInfo.icon +
+            ".png";
+          this.hasGetWeatherData = true;
           console.log(response);
         })
         .catch((error) => {
