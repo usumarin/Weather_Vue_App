@@ -14,6 +14,8 @@
         <img :src="getWeatherImageUrl" class="wetherCardImage" />
         <p class="weatherCardTemp">{{ getWeatherResult.main.temp }} ℃</p>
       </div>
+      風速:{{ getWeatherResult.wind.speed }}
+      }}
     </div>
   </section>
 </template>
