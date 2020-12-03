@@ -5,13 +5,15 @@
       placeholder="調べたい場所を入力してください"
     />
     <button @click="getWeather">天気を調べる</button>
-    <div v-if="hasGetWeatherData">
-      <p>地名:{{ getWeatherResult.name }}</p>
-      <li v-for="weather in getWeatherResult.weather" :key="weather.id">
-        天気: {{ weather.description }}
-        <img :src="getWeatherImageUrl" />
-      </li>
-      <p>気温: {{ getWeatherResult.main.temp }}</p>
+    <div v-if="hasGetWeatherData" id="weatherCard">
+      <h1 class="weatherCardHeader">{{ getWeatherResult.name }}</h1>
+      <div class="weatherCardDescription">
+        {{ getWeatherInfo.description }}
+      </div>
+      <div class="weatherCardWeatherData">
+        <img :src="getWeatherImageUrl" class="wetherCardImage" />
+        <p class="weatherCardTemp">{{ getWeatherResult.main.temp }} ℃</p>
+      </div>
     </div>
   </section>
 </template>
@@ -53,7 +55,7 @@ export default {
           this.getWeatherImageUrl =
             "http://openweathermap.org/img/wn/" +
             this.getWeatherInfo.icon +
-            ".png";
+            "@2x.png";
           this.hasGetWeatherData = true;
           console.log(response);
         })
@@ -64,3 +66,35 @@ export default {
   },
 };
 </script>
+
+<style>
+#weatherCard {
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
+  color: #212121;
+  text-decoration: none;
+  width: 400px;
+  margin: auto;
+}
+.weatherCardWeatherData {
+  display: flex;
+  align-items: center;
+}
+.weatherCardHeader {
+  text-align: left;
+  padding: 1%;
+}
+.weatherCardDescription {
+  font-size: 110%;
+  text-align: left;
+  padding: 0.5% 1%;
+}
+.weatherCardImage {
+  text-align: right;
+}
+.weatherCardTemp {
+  text-align: left;
+  margin: 0;
+  padding: 1% 1%;
+}
+</style>
