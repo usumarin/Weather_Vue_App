@@ -11,8 +11,16 @@
         {{ getWeatherInfo.description }}
       </div>
       <div class="weatherCardWeatherData">
-        <img :src="getWeatherImageUrl" class="wetherCardImage" />
+        <img :src="getWeatherImageUrl" class="weatherCardImage" />
         <p class="weatherCardTemp">{{ getWeatherResult.main.temp }} ℃</p>
+      </div>
+      <div class="weatherCardWeatherOtherData">
+        <div class="weatherCardWindSpeed">
+          風速:{{ getWeatherResult.wind.speed }}
+        </div>
+        <div class="weatherCardHumidity">
+          湿度:{{ getWeatherResult.main.humidity }}
+        </div>
       </div>
     </div>
   </section>
@@ -55,7 +63,7 @@ export default {
           this.getWeatherImageUrl =
             "http://openweathermap.org/img/wn/" +
             this.getWeatherInfo.icon +
-            "@2x.png";
+            "@4x.png";
           this.hasGetWeatherData = true;
           console.log(response);
         })
@@ -73,28 +81,46 @@ export default {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
   color: #212121;
   text-decoration: none;
+  height: 400px;
   width: 400px;
   margin: auto;
 }
 .weatherCardWeatherData {
+  height: 50%;
   display: flex;
   align-items: center;
 }
 .weatherCardHeader {
-  text-align: left;
-  padding: 1%;
+  height: 10%;
+  text-align: center;
+  padding-top: 2%;
 }
 .weatherCardDescription {
-  font-size: 110%;
-  text-align: left;
+  height: 5%;
+  font-size: 150%;
+  text-align: center;
   padding: 0.5% 1%;
 }
 .weatherCardImage {
-  text-align: right;
+  margin-left: auto;
 }
 .weatherCardTemp {
-  text-align: left;
-  margin: 0;
+  margin-right: 30px;
   padding: 1% 1%;
+}
+.weatherCardWeatherOtherData {
+  /* display: flex; */
+  height: 15%;
+  position: relative;
+}
+.weatherCardWindSpeed {
+  position: absolute;
+  bottom: 0;
+  left: 70px;
+}
+.weatherCardHumidity {
+  position: absolute;
+  bottom: 0;
+  right: 70px;
 }
 </style>
