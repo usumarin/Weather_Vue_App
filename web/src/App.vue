@@ -16,8 +16,9 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans JP", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
