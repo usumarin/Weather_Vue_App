@@ -12,14 +12,17 @@
       </div>
       <div class="weatherCardWeatherData">
         <img :src="getWeatherImageUrl" class="weatherCardImage" />
-        <p class="weatherCardTemp">{{ getWeatherResult.main.temp }} ℃</p>
+        <p class="weatherCardTemp">
+          <v-icon name="thermometer-half" scale="2" />
+          {{ getWeatherResult.main.temp }} ℃
+        </p>
       </div>
       <div class="weatherCardWeatherOtherData">
         <div class="weatherCardWindSpeed">
-          風速:{{ getWeatherResult.wind.speed }}
+          <v-icon name="wind" scale="2" /> {{ getWeatherResult.wind.speed }}
         </div>
         <div class="weatherCardHumidity">
-          湿度:{{ getWeatherResult.main.humidity }}
+          <v-icon name="tint" scale="2" /> {{ getWeatherResult.main.humidity }}
         </div>
       </div>
     </div>
