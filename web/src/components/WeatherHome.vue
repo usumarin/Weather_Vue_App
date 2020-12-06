@@ -19,10 +19,12 @@
       </div>
       <div class="weatherCardWeatherOtherData">
         <div class="weatherCardWindSpeed">
-          <v-icon name="wind" scale="2" /> {{ getWeatherResult.wind.speed }}
+          <v-icon name="wind" scale="2" />
+          {{ getWeatherResult.wind.speed + "m/s" }}
         </div>
         <div class="weatherCardHumidity">
-          <v-icon name="tint" scale="2" /> {{ getWeatherResult.main.humidity }}
+          <v-icon name="tint" scale="2" />
+          {{ getWeatherResult.main.humidity + "%" }}
         </div>
       </div>
     </div>
