@@ -11,8 +11,21 @@
         {{ getWeatherInfo.description }}
       </div>
       <div class="weatherCardWeatherData">
-        <img :src="getWeatherImageUrl" class="wetherCardImage" />
-        <p class="weatherCardTemp">{{ getWeatherResult.main.temp }} ℃</p>
+        <img :src="getWeatherImageUrl" class="weatherCardImage" />
+        <p class="weatherCardTemp">
+          <v-icon name="thermometer-half" scale="2" />
+          {{ getWeatherResult.main.temp }} ℃
+        </p>
+      </div>
+      <div class="weatherCardWeatherOtherData">
+        <div class="weatherCardWindSpeed">
+          <v-icon name="wind" scale="2" />
+          {{ getWeatherResult.wind.speed + "m/s" }}
+        </div>
+        <div class="weatherCardHumidity">
+          <v-icon name="tint" scale="2" />
+          {{ getWeatherResult.main.humidity + "%" }}
+        </div>
       </div>
       風速:{{ getWeatherResult.wind.speed }} 湿度:{{
         getWeatherResult.main.humidity
@@ -58,7 +71,7 @@ export default {
           this.getWeatherImageUrl =
             "http://openweathermap.org/img/wn/" +
             this.getWeatherInfo.icon +
-            "@2x.png";
+            "@4x.png";
           this.hasGetWeatherData = true;
           console.log(response);
         })
@@ -76,28 +89,49 @@ export default {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
   color: #212121;
   text-decoration: none;
+  height: 400px;
   width: 400px;
   margin: auto;
 }
 .weatherCardWeatherData {
+  height: 50%;
   display: flex;
   align-items: center;
 }
 .weatherCardHeader {
-  text-align: left;
-  padding: 1%;
+  height: 10%;
+  text-align: center;
+  padding-top: 2%;
 }
 .weatherCardDescription {
-  font-size: 110%;
-  text-align: left;
+  height: 5%;
+  font-size: 150%;
+  text-align: center;
   padding: 0.5% 1%;
 }
 .weatherCardImage {
-  text-align: right;
+  margin-left: auto;
 }
 .weatherCardTemp {
-  text-align: left;
-  margin: 0;
+  font-size: 120%;
+  margin-right: 15px;
   padding: 1% 1%;
+}
+.weatherCardWeatherOtherData {
+  /* display: flex; */
+  height: 15%;
+  position: relative;
+}
+.weatherCardWindSpeed {
+  font-size: 150%;
+  position: absolute;
+  bottom: 0;
+  left: 70px;
+}
+.weatherCardHumidity {
+  font-size: 150%;
+  position: absolute;
+  bottom: 0;
+  right: 70px;
 }
 </style>
