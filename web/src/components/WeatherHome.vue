@@ -27,9 +27,6 @@
           {{ getWeatherResult.main.humidity + "%" }}
         </div>
       </div>
-      風速:{{ getWeatherResult.wind.speed }} 湿度:{{
-        getWeatherResult.main.humidity
-      }}
     </div>
   </section>
 </template>
