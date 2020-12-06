@@ -110,7 +110,8 @@ export default {
   margin-left: auto;
 }
 .weatherCardTemp {
-  margin-right: 30px;
+  font-size: 120%;
+  margin-right: 15px;
   padding: 1% 1%;
 }
 .weatherCardWeatherOtherData {
@@ -119,11 +120,13 @@ export default {
   position: relative;
 }
 .weatherCardWindSpeed {
+  font-size: 150%;
   position: absolute;
   bottom: 0;
   left: 70px;
 }
 .weatherCardHumidity {
+  font-size: 150%;
   position: absolute;
   bottom: 0;
   right: 70px;
