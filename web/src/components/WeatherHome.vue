@@ -36,7 +36,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import { mapActions, mapState } from "vuex";
 export default {
   name: "WeatherHome",
@@ -54,30 +53,13 @@ export default {
         this.$store.commit("setGetWeatherQuery", value);
       },
     },
-    // getWeatherResult: {
-    //   get() {
-    //     return this.$store.state.getWeatherResult;
-    //   },
-    //   set(value) {
-    //     this.$store.commit("setGetWeatherResult", value);
-    //   },
-    // },
     ...mapState(["getWeatherResult", "hasGetWeatherData"]),
-    // getHasWeatherData: {
-    //   get() {
-    //     return this.$store.state.hasWeatherData;
-    //   },
-    //   set(value) {
-    //     this.$store.commit("setHasGetWeatherData", value);
-    //   },
-    // },
   },
   methods: {
     ...mapActions(["getWeather"]),
     getData() {
       this.getWeather(this.search);
     },
-    // ...mapGetters(["getWeatherResult"]),
   },
 };
 </script>
