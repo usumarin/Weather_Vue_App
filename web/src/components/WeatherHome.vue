@@ -1,30 +1,34 @@
 <template>
   <section id="weatherHome">
-    <input
-      v-model="getWeatherQuery"
-      placeholder="調べたい場所を入力してください"
-    />
-    <button @click="getWeather">天気を調べる</button>
-    <div v-if="hasGetWeatherData" id="weatherCard">
-      <h1 class="weatherCardHeader">{{ getWeatherResult.name }}</h1>
+    <input v-model.trim="search" placeholder="調べたい場所を入力してください" />
+    <button @click="getData">天気を調べる</button>
+    <div v-if="this.hasGetWeatherData" id="weatherCard">
+      <h1 class="weatherCardHeader">
+        {{ this.getWeatherResult.name }}
+      </h1>
       <div class="weatherCardDescription">
-        {{ getWeatherInfo.description }}
+        {{ this.getWeatherResult.description }}
       </div>
       <div class="weatherCardWeatherData">
-        <img :src="getWeatherImageUrl" class="weatherCardImage" />
+        <img
+          :src="
+            `http://openweathermap.org/img/wn/${this.getWeatherResult.icon}@4x.png`
+          "
+          class="weatherCardImage"
+        />
         <p class="weatherCardTemp">
           <v-icon name="thermometer-half" scale="2" />
-          {{ getWeatherResult.main.temp }} ℃
+          {{ this.getWeatherResult.temp }} ℃
         </p>
       </div>
       <div class="weatherCardWeatherOtherData">
         <div class="weatherCardWindSpeed">
           <v-icon name="wind" scale="2" />
-          {{ getWeatherResult.wind.speed + "m/s" }}
+          {{ this.getWeatherResult.wind + "m/s" }}
         </div>
         <div class="weatherCardHumidity">
           <v-icon name="tint" scale="2" />
-          {{ getWeatherResult.main.humidity + "%" }}
+          {{ this.getWeatherResult.humidity + "%" }}
         </div>
       </div>
     </div>
@@ -32,50 +36,48 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "WeatherHome",
   data() {
     return {
-      getWeatherQuery: "",
-      getWeatherResult: {},
-      getWeatherInfo: {},
-      getWeatherImageUrl: "",
-      hasGetWeatherData: false,
+      search: "",
     };
   },
-  methods: {
-    getWeather() {
-      let apiURL = "https://community-open-weather-map.p.rapidapi.com/weather";
-      axios
-        .get(apiURL, {
-          headers: {
-            "content-type": "application/octet-stream",
-            "x-rapidapi-host": process.env.VUE_APP_OPEN_WEATHER_MAP_API_HOST,
-            "x-rapidapi-key": process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY,
-            useQueryString: true,
-          },
-          params: {
-            id: "2172797",
-            lang: "ja",
-            units: "metric",
-            q: this.getWeatherQuery,
-          },
-        })
-        .then((response) => {
-          this.getWeatherResult = response.data;
-          this.getWeatherInfo = Object.assign(...this.getWeatherResult.weather);
-          this.getWeatherImageUrl =
-            "http://openweathermap.org/img/wn/" +
-            this.getWeatherInfo.icon +
-            "@4x.png";
-          this.hasGetWeatherData = true;
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  computed: {
+    weatherQuery: {
+      get() {
+        return this.$store.state.getWeatherQuery;
+      },
+      set(value) {
+        this.$store.commit("setGetWeatherQuery", value);
+      },
     },
+    // getWeatherResult: {
+    //   get() {
+    //     return this.$store.state.getWeatherResult;
+    //   },
+    //   set(value) {
+    //     this.$store.commit("setGetWeatherResult", value);
+    //   },
+    // },
+    ...mapState(["getWeatherResult", "hasGetWeatherData"]),
+    // getHasWeatherData: {
+    //   get() {
+    //     return this.$store.state.hasWeatherData;
+    //   },
+    //   set(value) {
+    //     this.$store.commit("setHasGetWeatherData", value);
+    //   },
+    // },
+  },
+  methods: {
+    ...mapActions(["getWeather"]),
+    getData() {
+      this.getWeather(this.search);
+    },
+    // ...mapGetters(["getWeatherResult"]),
   },
 };
 </script>
