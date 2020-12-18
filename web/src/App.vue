@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <WeatherHome></WeatherHome>
+    <WeatherAnime> </WeatherAnime>
   </div>
 </template>
 
 <script>
 import WeatherHome from "./components/WeatherHome.vue";
+import WeatherAnime from "./components/WeatherAnime.vue";
 
 export default {
   name: "App",
   components: {
     WeatherHome,
+    WeatherAnime,
   },
 };
 </script>
