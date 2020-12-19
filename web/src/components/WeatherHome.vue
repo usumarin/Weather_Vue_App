@@ -49,6 +49,9 @@ export default {
       search: "",
     };
   },
+  created: function() {
+    this.getWeather("Tokyo");
+  },
   computed: {
     weatherQuery: {
       get() {
