@@ -1,8 +1,13 @@
 <template>
-  <section id="weatherHome">
-    <input v-model.trim="search" placeholder="調べたい場所を入力してください" />
-    <button @click="getData">天気を調べる</button>
-    <div v-if="this.hasGetWeatherData" id="weatherCard">
+  <div id="weatherHome">
+    <div id="weatherCard">
+      <div class="weatherSearch">
+        <input
+          v-model.trim="search"
+          placeholder="調べたい場所を入力してください"
+        />
+        <button @click="getData">天気を調べる</button>
+      </div>
       <h1 class="weatherCardHeader">
         {{ this.getWeatherResult.name }}
       </h1>
@@ -32,7 +37,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -65,14 +70,28 @@ export default {
 </script>
 
 <style>
+#weatherHome {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.weatherSearch {
+  margin: 5% auto auto auto;
+  width: 70%;
+  height: 10%;
+}
 #weatherCard {
-  background-color: #fff;
+  background-color: #eeeeee94;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
   color: #212121;
   text-decoration: none;
   height: 400px;
   width: 400px;
-  margin: auto;
+  margin: 200px auto;
 }
 .weatherCardWeatherData {
   height: 50%;
@@ -82,7 +101,6 @@ export default {
 .weatherCardHeader {
   height: 10%;
   text-align: center;
-  padding-top: 2%;
 }
 .weatherCardDescription {
   height: 5%;
@@ -106,13 +124,13 @@ export default {
 .weatherCardWindSpeed {
   font-size: 150%;
   position: absolute;
-  bottom: 0;
+  bottom: 20%;
   left: 70px;
 }
 .weatherCardHumidity {
   font-size: 150%;
   position: absolute;
-  bottom: 0;
+  bottom: 20%;
   right: 70px;
 }
 </style>
