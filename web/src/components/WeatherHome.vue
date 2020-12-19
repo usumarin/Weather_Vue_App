@@ -6,7 +6,7 @@
           v-model.trim="search"
           placeholder="調べたい場所を入力してください"
         />
-        <button @click="getData">天気を調べる</button>
+        <button @click="getData" class="weatherCardButton">天気を調べる</button>
       </div>
       <h1 class="weatherCardHeader">
         {{ this.getWeatherResult.name }}
@@ -135,5 +135,12 @@ export default {
   position: absolute;
   bottom: 20%;
   right: 70px;
+}
+.weatherCardButton {
+  border: 2px solid transparent;
+}
+.weatherCardButton:hover {
+  background: transparent;
+  border-color: white;
 }
 </style>
