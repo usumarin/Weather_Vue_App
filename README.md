@@ -1,0 +1,9 @@
+# Weather_Vue_App
+RapidApiのOpenWeatherMapを使い入力された天気を表示するアプリです
+
+# 使い方
+webディレクトリ直下に.envファイルを作成しRapidApiで取得したAPIキーなどを入力してください
+
+VUE_APP_OPEN_WEATHER_MAP_API_KEYにはX-RapidAPI-Key
+
+VUE_APP_OPEN_WEATHER_MAP_API_HOSTにはX-RapidAPI-Host
