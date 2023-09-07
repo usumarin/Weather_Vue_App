@@ -1,14 +1,14 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
     apiKey: process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY,
-    apiHost: "https://community-open-weather-map.p.rapidapi.com/weather",
-    getWeatherQuery: "",
+    apiHost: 'https://open-weather13.p.rapidapi.com/city/',
+    getWeatherQuery: '',
     getWeatherResult: {},
     hasGetWeatherData: false,
   },
@@ -34,21 +34,24 @@ const store = new Vuex.Store({
   actions: {
     async getWeather({ commit, state }, getWeatherQuery) {
       try {
-        commit("setGetWeatherQuery", getWeatherQuery);
+        commit('setGetWeatherQuery', getWeatherQuery);
 
-        const response = await axios.get(state.apiHost, {
-          headers: {
-            "content-type": "application/octet-stream",
-            "x-rapidapi-host": process.env.VUE_APP_OPEN_WEATHER_MAP_API_HOST,
-            "x-rapidapi-key": process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY,
-            useQueryString: true,
-          },
-          params: {
-            lang: "ja",
-            units: "metric",
-            q: state.getWeatherQuery,
-          },
-        });
+        const response = await axios.get(
+          state.apiHost + state.getWeatherQuery,
+          {
+            headers: {
+              'content-type': 'application/octet-stream',
+              'x-rapidapi-host': process.env.VUE_APP_OPEN_WEATHER_MAP_API_HOST,
+              'x-rapidapi-key': process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY,
+              useQueryString: true,
+            },
+            params: {
+              // lang: 'ja',
+              // units: 'metric',
+              // q: state.getWeatherQuery,
+            },
+          }
+        );
 
         const newWeatherData = {
           name: response.data.name,
@@ -60,8 +63,8 @@ const store = new Vuex.Store({
           humidity: response.data.main.humidity,
         };
 
-        commit("setGetWeatherResult", newWeatherData);
-        commit("setHasGetWeatherData", true);
+        commit('setGetWeatherResult', newWeatherData);
+        commit('setHasGetWeatherData', true);
       } catch (error) {
         console.log(error);
       }
